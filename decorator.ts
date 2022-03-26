@@ -1,18 +1,20 @@
 //.at the end of the day decorators are just functions.
 
-function MenuItem(target: Function) {
-    target.prototype.id = 'abc';
+function MenuItem(itemID: string) {
+    return (target: Function) => {
+        target.prototype.id = itemID;
+    } 
 }
 
-@MenuItem
+@MenuItem("abc")
 class Pizza {
-    id: string;
-    constructor() {
-        this.id = '123'
-    }
+    id!: string;
+    // constructor() {
+    //     this.id = '123'
+    // }
 }
 
-@MenuItem
+@MenuItem("def")
 class Hamburger {
     id!: string; // if "strictPropertyInitialization": true then you need need to disable the strictPropertyInitialization rule with the !. or initalize the property with a default value in the constructor.
 }
